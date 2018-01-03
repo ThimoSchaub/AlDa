@@ -86,26 +86,27 @@ public class ShortestPath<V> {
         while (!kl.isEmpty()) {
             double min = Double.POSITIVE_INFINITY;
             V minNode = kl.element();
+            V v;
             if (heuristic != null) {
-                for (V v : kl) {
-                    if (dist.get(v)+ heurstik <= min) {
+                for (V m : kl) {
+                    if (dist.get(m) <= min) {
                         //System.out.println("Kleinster knoten"+v);
-                        min = dist.get(v);
-                        minNode = v;
+                        min = dist.get(m);
+                        minNode = m;
                     }
                 }
                 kl.remove(minNode);
-                V v = minNode;
+                v = minNode;
             } else {
-                for (V v : kl) {
-                    if (dist.get(v) <= min) {
+                for (V m : kl) {
+                    if (dist.get(m) <= min) {
                         //System.out.println("Kleinster knoten"+v);
-                        min = dist.get(v);
-                        minNode = v;
+                        min = dist.get(m);
+                        minNode = m;
                     }
                 }
                 kl.remove(minNode);
-                V v = minNode;
+                v = minNode;
 
             }
 
