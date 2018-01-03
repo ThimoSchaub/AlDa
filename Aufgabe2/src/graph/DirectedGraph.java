@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Graph mit gerichteten Kanten.
  * Es ist zu beachten, dass g.addEdge(v,w) 
- * eine gerichtete Kante von v nach w einfÃ¼gt.
+ * eine gerichtete Kante von v nach w einfügt.
  * @author Oliver Bittel
  * @since 22.02.2017
  * @param <V> Knotentyp.
@@ -15,7 +15,7 @@ import java.util.List;
 public interface DirectedGraph<V> extends Graph<V> {
 
     /**
-     * Liefert Eingangsgrad des Knotens v zurück.
+     * Liefert Eingangsgrad des Knotens v zur?ck.
      * Das ist die Anzahl der Kanten mit Zielknoten v.
      * @param v Knoten
      * @throws IllegalArgumentException falls Knoten v
@@ -25,7 +25,7 @@ public interface DirectedGraph<V> extends Graph<V> {
     int getInDegree(V v);
 
     /**
-     * Liefert Ausgangsgrad des Knotens v zurück.
+     * Liefert Ausgangsgrad des Knotens v zur?ck.
      * Das ist die Anzahl der Kanten mit Quellknoten v.
      * @param v Knoten
      * @throws IllegalArgumentException falls Knoten v
@@ -35,8 +35,8 @@ public interface DirectedGraph<V> extends Graph<V> {
     int getOutDegree(V v);
 
     /**
-     * Liefert die Liste aller VorgÃ¤ngerknoten zu v zurÃ¼ck.
-     * Das sind alle die Knoten, von denen eine Kante zu v fÃ¼hrt.
+     * Liefert die Liste aller Vorgängerknoten zu v zurück.
+     * Das sind alle die Knoten, von denen eine Kante zu v führt.
      * @param v Knoten
      * @throws IllegalArgumentException falls Knoten v
      * nicht im Graph vorhanden ist.
@@ -45,8 +45,8 @@ public interface DirectedGraph<V> extends Graph<V> {
     List<V> getPredecessorVertexList(V v);
 
     /**
-     * Liefert die Liste aller Nachfolgerknoten zu v zurÃ¼ck. 
-     * Das sind alle die Knoten, zu denen eine Kante von v fÃ¼hrt.
+     * Liefert die Liste aller Nachfolgerknoten zu v zurück. 
+     * Das sind alle die Knoten, zu denen eine Kante von v führt.
      * @param v Knoten
      * @throws IllegalArgumentException falls Knoten v
      * nicht im Graph vorhanden ist.
