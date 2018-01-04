@@ -4,12 +4,14 @@ import graph.*;
 
 import java.io.FileNotFoundException;
 
+import gui.Station;
 import sim.SYSimulation;
 
 import java.awt.Color;
 import java.io.IOException;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -106,6 +108,7 @@ public class ScotlandYard {
 
         DirectedGraph<Integer> syGraph = getGraph();
         Heuristic<Integer> syHeuristic = getHeuristic();
+        System.out.println(syHeuristic);
         //System.out.println(syGraph.getWeight(78, 79));
         //System.out.println(syGraph.getWeight(65, 82));
 
@@ -174,12 +177,19 @@ class ScotlandYardHeuristic implements Heuristic<Integer> {
     }
 
     public ScotlandYardHeuristic() throws FileNotFoundException {
-        // ...
+        Scanner in = new Scanner(new File("Z:/Alda/Aufgabe_2/Aufgabe_2/Aufgabe2/src/shortestPath/ScotlandYard_Knoten.txt"));
+        coord = new HashMap<>();
+        while (in.hasNext()) {
+            int nr = in.nextInt();
+            int x = in.nextInt();
+            int y = in.nextInt();
+            this.coord.put(nr,new Point(x,y));
+        }
+
     }
 
-    public double estimatedCost(Integer u, Integer v) {
-        // ...
-        return 1.0;
+    public double estimatedCost( Integer u, Integer v) {
+        return Math.sqrt((Math.pow(coord.get(u).x-coord.get(v).x,2.0))+(Math.pow(coord.get(u).y-coord.get(v).y,2.0)))/30;
     }
 }
 

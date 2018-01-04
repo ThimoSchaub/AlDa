@@ -82,16 +82,15 @@ public class ShortestPath<V> {
         }
         dist.put(s, 0.0);
         kl.add(s);
-
-        while (!kl.isEmpty()) {
+        boolean exit = true;
+        while (!kl.isEmpty() && exit) {
             double min = Double.POSITIVE_INFINITY;
             V minNode = kl.element();
             V v;
             if (heuristic != null) {
                 for (V m : kl) {
-                    if (dist.get(m) <= min) {
-                        //System.out.println("Kleinster knoten"+v);
-                        min = dist.get(m);
+                    if (dist.get(m) + heuristic.estimatedCost(m, g) <= min) {
+                        min = dist.get(m) + heuristic.estimatedCost(m, g);
                         minNode = m;
                     }
                 }
@@ -107,11 +106,9 @@ public class ShortestPath<V> {
                 }
                 kl.remove(minNode);
                 v = minNode;
-
             }
-
             if (sim != null) {
-                sim.visitStation(Integer.valueOf(v.toString()));
+                sim.visitStation(Integer.valueOf(v.toString()),Color.BLUE);
             }
             for (V w : graph.getSuccessorVertexList(v)) {
                 if (dist.get(w) == Double.POSITIVE_INFINITY) {
@@ -122,19 +119,19 @@ public class ShortestPath<V> {
                     dist.put(w, dist.get(v) + graph.getWeight(v, w));
                 }
             }
+            if (minNode.equals(g) && heuristic != null) {
+                break;
+            }
         }
         if (sim != null) {
             List<V> list = getShortestPath();
             for (V v : list) {
                 if (v != start) {
                     sim.drive(Integer.valueOf(pred.get(v).toString()), Integer.valueOf(v.toString()), Color.GREEN);
-
                 }
             }
         }
-
     }
-
     /**
      * Liefert einen kürzesten Weg von Startknoten s nach Zielknoten g.
      * Setzt eine erfolgreiche Suche von searchShortestPath(s,g) voraus.
